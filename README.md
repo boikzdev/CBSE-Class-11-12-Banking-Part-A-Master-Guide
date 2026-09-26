@@ -1,121 +1,104 @@
-# 🎓 EmployaLearn Studio
+# CBSE Class 11-12 Banking Part A Master Guide (Employa Learn Studio)
 
-**Interactive Mastery Platform for CBSE Class 12 Banking – Part A: Employability Skills**
+🚀 **Live App**: [employalearnstudio.netlify.app](https://employalearnstudio.netlify.app/)
 
-Live Demo → [https://employalearnstudio.netlify.app/](https://employalearnstudio.netlify.app/)
-
-An interactive, fully responsive single-page web application that helps Class 12 Banking students master **Part A (Employability Skills)** through active practice instead of passive notes.
-
-Target: **10/10 in Part A**.
+Welcome to the **CBSE Class 11-12 Banking Part A Master Guide** (powered by *Employa Learn Studio*). This open-source study suite is specifically crafted to help CBSE Class 11 & 12 Banking students master **Part A: Employability Skills** with interactive tools, structured revision resources, and dynamic practice testing.
 
 ---
 
-## 🌟 Why this exists
+## 🌟 Key Features
 
-Part A tests three units:
-- Communication Skills  
-- Self-Motivation & Self-Management  
-- ICT Skills  
+- 📑 **Complete Unit Summaries & Notes**: CBSE curriculum-aligned study materials covering all Employability Skills units.
+- 🧠 **Visual Mind Maps & Revision Cheat Sheets**: Concise key takeaways for rapid revision prior to examinations.
+- 🎴 **Interactive Flashcards**: 20 targeted flashcards per unit to strengthen active recall and vocabulary retention.
+- 🎲 **Randomized Dynamic Practice Tests**: Topic-wise practice quizzes with immediate score tracking to measure accuracy.
+- 🏆 **Grand Board Mock Assessment**: A timed, full-length mock exam designed to simulate actual CBSE board exam conditions.
+- 📊 **Progress Dashboard**: Built-in progress tracking for units completed, flashcards mastered, and test performance.
 
-Examiners look for **exact key terms** (7 C’s, SMART criteria, Virus vs Worm vs Trojan, etc.).  
-This platform turns those high-yield concepts into interactive tools so you can practice, self-test, and lock in full marks.
+---
+
+## 📚 Curriculum Alignment
+
+Covering CBSE Class 11 & 12 Employability Skills (Part A):
+1. **Communication Skills**
+2. **Self-Management Skills**
+3. **Information and Communication Technology (ICT) Skills**
+4. **Entrepreneurial Skills**
+5. **Green Skills**
 
 ---
 
-## ✨ Key Features
+## 🤝 Open Source & Contributing
 
-### Unit 1 – Communication Skills
-- 5 Steps of Active Listening (click-to-reveal)
-- 7 C’s of Effective Communication (flip cards with banking examples)
-- Communication Barriers Scenario Solver
-- MINTS Capitalization Rule
-- Active ↔ Passive Voice Transformer
+This project is **100% Open Source**! Contributions from students, educators, and developers are warmly welcomed.
 
-### Unit 2 – Self-Motivation & Self-Management
-- Intrinsic vs Extrinsic Motivation Sorter
-- Interactive SMART Goal Analyzer
-- 4 Steps of Time Management
+Whether you want to improve quiz questions, fix typos, enhance the user interface, or add additional study features, your help makes this resource better for all students nationwide.
 
-### Unit 3 – ICT Skills
-- Core Functions of an Operating System
-- Cyber Threat Identification Matrix (Virus, Worm, Trojan, Phishing, Spyware)
-- 5 Best Security Practices checklist
+### How to Contribute:
+1. **Fork** this repository.
+2. **Clone** your fork locally:
+   ```bash
+   git clone [https://github.com/boikzdev/CBSE-Class-11-12-Banking-Part-A-Master-Guide.git](https://github.com/boikzdev/CBSE-Class-11-12-Banking-Part-A-Master-Guide.git)
 
-### Exam Tools
-- Full Marks Practice Quiz with instant scoring
-- Dynamic Exam Readiness Checklist
-- Live Mastery Progress Bar
+3.  **Create a Feature Branch**:
+    
+    Bash
+    
+    ```
+    git checkout -b feature/your-feature-name
+    
+    ```
+    
+4.  **Commit Your Changes**:
+    
+      
+    
+    Bash
+    
+    ```
+    git commit -m "Add: description of changes"
+    
+    ```
+    
+5.  **Push to Your Branch**:
+    
+      
+    
+    Bash
+    
+    ```
+    git push origin feature/your-feature-name
+    
+    ```
+    
+6.  Open a **Pull Request** explaining your enhancements or fixes.
+    
+      
+    
 
----
+If you discover a bug or have an idea for a new feature, feel free to open an [Issue](https://www.google.com/search?q=https://github.com/boikzdev/CBSE-Class-11-12-Banking-Part-A-Master-Guide/issues&utm_source=gemini).
+
+  
 
 ## 🛠️ Tech Stack
 
-- **HTML5** – single-file architecture  
-- **Tailwind CSS** (CDN) – modern glassmorphism UI + dark mode  
-- **Vanilla JavaScript (ES6+)** – all interactivity, quiz logic, progress tracking  
-- **Font Awesome 6** – clean icons  
+-   **Frontend**: HTML5, CSS3, JavaScript (ES6+)
+    
+      
+    
+-   **Hosting**: Netlify
+    
+      
+    
+-   **Design & UI**: Responsive Web Design focused on student accessibility
+    
+      
+    
 
-No build step. No dependencies. Just open and go.
+## 📄 License
 
----
+This project is open-source and available under the [MIT License](https://www.google.com/search?q=LICENSE&utm_source=gemini). Feel free to use, modify, and distribute it to help students excel in their board examinations.
 
-## 🚀 Quick Start
+  
 
-### Option 1 – Use the live site
-Just open → [https://employalearnstudio.netlify.app/](https://employalearnstudio.netlify.app/)
-
-### Option 2 – Run locally
-```bash
-git clone https://github.com/boikzdev/CBSE-Class-11-12-Banking-Part-A-Master-Guide.git
-cd CBSE-Class-11-12-Banking-Part-A-Master-Guide
-# Then simply open index.html in any browser
-```
-
-That’s it. No `npm install`, no server required.
-
----
-
-## 📁 Project Structure
-
-```
-.
-├── index.html      # Complete application (HTML + CSS + JS)
-├── LICENSE
-└── README.md
-```
-
----
-
-## 📊 Content Overview
-
-| Unit | Core Topics | Interactive Tools |
-|------|-------------|-------------------|
-| 1 – Communication | Active Listening, 7 C’s, Barriers, MINTS, Voice | Flip cards + Scenario solver |
-| 2 – Self-Management | Intrinsic/Extrinsic, SMART Goals, Time Mgmt | Sorter + Goal analyzer |
-| 3 – ICT Skills | OS Functions, Cyber Threats, Security | Threat matrix + Checklists |
-| Exam Practice | High-yield MCQs | Auto-scored quiz + Mastery tracker |
-
----
-
-## 🤝 Contributing
-
-Want to add more quiz questions, new interactive modules, or improve explanations?
-
-1. Fork the repo  
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)  
-3. Commit your changes  
-4. Push and open a Pull Request  
-
-All contributions that help students score higher in Part A are welcome.
-
----
-
-## 📜 License
-
-Distributed under the **MIT License**. See `LICENSE` for details.
-
----
-
-**Built for students who want full marks in Part A — not just notes.**  
-Live site: [employalearnstudio.netlify.app](https://employalearnstudio.netlify.app/)
-
+_Maintained with ❤️ by [boikzdev](https://www.google.com/search?q=https://github.com/boikzdev&utm_source=gemini)._
