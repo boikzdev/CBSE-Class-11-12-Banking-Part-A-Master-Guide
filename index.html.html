@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Part A Employability Skills - Full Marks Interactive Mastery</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              900: '#312e81',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .glass-card {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 4px;
+    }
+    .flip-card {
+      perspective: 1000px;
+    }
+    .flip-card-inner {
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+    .flip-card.flipped .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+    .flip-card-front, .flip-card-back {
+      backface-visibility: hidden;
+    }
+    .flip-card-back {
+      transform: rotateY(180deg);
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col custom-scrollbar">
+
+  <!-- Top Navigation Header -->
+  <header class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+            <i class="fa-solid font-bold text-white text-lg">A</i>
+          </div>
+          <div>
+            <h1 class="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-violet-300">Part A Master Studio</h1>
+            <p class="text-xs text-slate-400">Class 12 Banking — Employability Skills</p>
+          </div>
+        </div>
+
+        <!-- Global Master Progress Indicator -->
+        <div class="hidden md:flex items-center space-x-6">
+          <div class="flex items-center space-x-3">
+            <div class="text-right">
+              <span class="text-xs text-slate-400 uppercase tracking-wider block">Mastery Score</span>
+              <span id="mastery-percent" class="text-sm font-extrabold text-emerald-400">0%</span>
+            </div>
+            <div class="w-28 bg-slate-800 rounded-full h-2.5 overflow-hidden border border-slate-700">
+              <div id="mastery-bar" class="bg-gradient-to-r from-indigo-500 to-emerald-400 h-2.5 rounded-full w-0 transition-all duration-500"></div>
+            </div>
+          </div>
+          <button onclick="resetProgress()" class="text-xs px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition" title="Reset tracking">
+            <i class="fa-solid fa-rotate-left mr-1"></i> Reset
+          </button>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <div class="flex space-x-1 sm:space-x-2 overflow-x-auto custom-scrollbar pb-2 pt-1">
+        <button onclick="switchTab('dashboard')" id="tab-dashboard" class="nav-tab text-xs sm:text-sm font-medium px-3 sm:px-4 py-2 rounded-lg transition flex items-center space-x-2 whitespace-nowrap bg-indigo-600 text-white">
+          <i class="fa-solid fa-chart-line"></i> <span>Blueprint & Overview</span>
+        </button>
+        <button onclick="switchTab('unit1')" id="tab-unit1" class="nav-tab text-xs sm:text-sm font-medium px-3 sm:px-4 py-2 rounded-lg transition flex items-center space-x-2 whitespace-nowrap bg-slate-800/80 text-slate-400 hover:text-slate-200">
+          <i class="fa-solid fa-comments"></i> <span>Unit 1: Communication</span>
+        </button>
+        <button onclick="switchTab('unit2')" id="tab-unit2" class="nav-tab text-xs sm:text-sm font-medium px-3 sm:px-4 py-2 rounded-lg transition flex items-center space-x-2 whitespace-nowrap bg-slate-800/80 text-slate-400 hover:text-slate-200">
+          <i class="fa-solid fa-bullseye"></i> <span>Unit 2: Motivation & Goals</span>
+        </button>
+        <button onclick="switchTab('unit3')" id="tab-unit3" class="nav-tab text-xs sm:text-sm font-medium px-3 sm:px-4 py-2 rounded-lg transition flex items-center space-x-2 whitespace-nowrap bg-slate-800/80 text-slate-400 hover:text-slate-200">
+          <i class="fa-solid fa-shield-halved"></i> <span>Unit 3: ICT & Security</span>
+        </button>
+        <button onclick="switchTab('quiz')" id="tab-quiz" class="nav-tab text-xs sm:text-sm font-medium px-3 sm:px-4 py-2 rounded-lg transition flex items-center space-x-2 whitespace-nowrap bg-slate-800/80 text-slate-400 hover:text-slate-200">
+          <i class="fa-solid fa-pen-to-square"></i> <span>Full Marks Practice Quiz</span>
+        </button>
+        <button onclick="switchTab('checklist')" id="tab-checklist" class="nav-tab text-xs sm:text-sm font-medium px-3 sm:px-4 py-2 rounded-lg transition flex items-center space-x-2 whitespace-nowrap bg-slate-800/80 text-slate-400 hover:text-slate-200">
+          <i class="fa-solid fa-list-check"></i> <span>Exam Checklist</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-grow w-full">
+
+    <!-- TAB 0: DASHBOARD / OVERVIEW -->
+    <section id="sec-dashboard" class="tab-content space-y-6">
+      <!-- Welcome Banner -->
+      <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-indigo-900/80 via-slate-900 to-purple-900/80 p-6 sm:p-8 border border-indigo-500/20 shadow-2xl">
+        <div class="relative z-10 max-w-3xl">
+          <span class="inline-block px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 text-xs font-semibold mb-3 border border-indigo-500/30">Target: 10/10 Score in Part A</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">Master Employability Skills with Active Practice</h2>
+          <p class="mt-2 text-slate-300 text-sm sm:text-base leading-relaxed">
+            Part A tests 3 units: **Communication Skills**, **Self Motivation**, and **ICT Skills**. Examiners check for exact key terms like <i>7 C’s</i>, <i>SMART criteria</i>, and <i>Cyber Threat definitions</i>. Use this interactive platform to learn, test, and lock in guaranteed full marks!
+          </p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <button onclick="switchTab('unit1')" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold shadow-lg shadow-indigo-600/30 transition">
+              Start Learning Unit 1 <i class="fa-solid fa-arrow-right ml-2"></i>
+            </button>
+            <button onclick="switchTab('quiz')" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm font-semibold border border-slate-700 transition">
+              Test Knowledge Now
+            </button>
+          </div>
+        </div>
+        <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      </div>
+
+      <!-- Syllabus Breakdown Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Unit 1 Card -->
+        <div class="glass-card rounded-2xl p-5 border border-slate-800 hover:border-indigo-500/40 transition group">
+          <div class="w-12 h-12 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+            <i class="fa-solid fa-comments"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white mb-1">Unit 1: Communication</h3>
+          <p class="text-xs text-slate-400 mb-4">Active listening steps, 7 Cs of communication, 5 types of barriers, MINTS capitalization rule, Active/Passive voice.</p>
+          <div class="space-y-2 text-xs">
+            <div class="flex justify-between text-slate-300">
+              <span>Key Focus:</span>
+              <span class="text-indigo-400 font-semibold">7 C's & Barriers</span>
+            </div>
+            <div class="flex justify-between text-slate-300">
+              <span>High-Yield Topic:</span>
+              <span class="text-indigo-400 font-semibold">Active Listening Steps</span>
+            </div>
+          </div>
+          <button onclick="switchTab('unit1')" class="w-full mt-5 py-2 rounded-lg bg-slate-800 hover:bg-indigo-600 text-xs text-slate-200 hover:text-white transition font-medium">
+            Open Interactive Unit 1
+          </button>
+        </div>
+
+        <!-- Unit 2 Card -->
+        <div class="glass-card rounded-2xl p-5 border border-slate-800 hover:border-emerald-500/40 transition group">
+          <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+            <i class="fa-solid fa-bullseye"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white mb-1">Unit 2: Self Motivation</h3>
+          <p class="text-xs text-slate-400 mb-4">Intrinsic vs Extrinsic motivation, characteristics of self-starters, SMART goal setting tool, 4 steps of Time Management.</p>
+          <div class="space-y-2 text-xs">
+            <div class="flex justify-between text-slate-300">
+              <span>Key Focus:</span>
+              <span class="text-emerald-400 font-semibold">SMART Goals</span>
+            </div>
+            <div class="flex justify-between text-slate-300">
+              <span>High-Yield Topic:</span>
+              <span class="text-emerald-400 font-semibold">Intrinsic vs Extrinsic</span>
+            </div>
+          </div>
+          <button onclick="switchTab('unit2')" class="w-full mt-5 py-2 rounded-lg bg-slate-800 hover:bg-emerald-600 text-xs text-slate-200 hover:text-white transition font-medium">
+            Open Interactive Unit 2
+          </button>
+        </div>
+
+        <!-- Unit 3 Card -->
+        <div class="glass-card rounded-2xl p-5 border border-slate-800 hover:border-violet-500/40 transition group">
+          <div class="w-12 h-12 rounded-xl bg-violet-500/20 text-violet-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+            <i class="fa-solid fa-laptop-code"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white mb-1">Unit 3: ICT Skills</h3>
+          <p class="text-xs text-slate-400 mb-4">Operating System functions, physical & software PC maintenance, Cyber Threat scanner (Virus, Worm, Trojan, Phishing, Spyware).</p>
+          <div class="space-y-2 text-xs">
+            <div class="flex justify-between text-slate-300">
+              <span>Key Focus:</span>
+              <span class="text-violet-400 font-semibold">Cyber Threats & OS</span>
+            </div>
+            <div class="flex justify-between text-slate-300">
+              <span>High-Yield Topic:</span>
+              <span class="text-violet-400 font-semibold">Security Best Practices</span>
+            </div>
+          </div>
+          <button onclick="switchTab('unit3')" class="w-full mt-5 py-2 rounded-lg bg-slate-800 hover:bg-violet-600 text-xs text-slate-200 hover:text-white transition font-medium">
+            Open Interactive Unit 3
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 1: UNIT 1 COMMUNICATION SKILLS -->
+    <section id="sec-unit1" class="tab-content hidden space-y-8">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+        <div>
+          <h2 class="text-xl font-bold text-white flex items-center gap-2">
+            <span class="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-sm">1</span>
+            Unit 1: Communication Skills
+          </h2>
+          <p class="text-xs text-slate-400 mt-0.5">Master active listening, 7 C's, communication barriers, and writing rules.</p>
+        </div>
+      </div>
+
+      <!-- Topic 1: Active Listening Interactive Timeline -->
+      <div class="glass-card rounded-2xl p-6 border border-slate-800">
+        <h3 class="text-md font-bold text-indigo-300 mb-2 flex items-center gap-2">
+          <i class="fa-solid fa-ear-listen"></i> 1. The 5 Steps of Active Listening
+        </h3>
+        <p class="text-xs text-slate-400 mb-6">Click on each step to learn what to write for full marks in exam questions:</p>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-5 gap-3">
+          <div onclick="toggleActiveStep(1)" id="step-btn-1" class="active-step-card cursor-pointer rounded-xl bg-slate-900 p-4 border border-indigo-500/50 hover:border-indigo-400 transition">
+            <div class="text-xs font-semibold text-indigo-400 mb-1">Step 01</div>
+            <div class="text-sm font-bold text-white">Listening</div>
+            <p class="text-[11px] text-slate-400 mt-2 leading-tight">Pay complete attention without interrupting the speaker.</p>
+          </div>
+          <div onclick="toggleActiveStep(2)" id="step-btn-2" class="active-step-card cursor-pointer rounded-xl bg-slate-900/60 p-4 border border-slate-800 hover:border-indigo-400 transition">
+            <div class="text-xs font-semibold text-slate-500 mb-1">Step 02</div>
+            <div class="text-sm font-bold text-white">Understanding</div>
+            <p class="text-[11px] text-slate-400 mt-2 leading-tight">Process & comprehend the exact meaning of the words.</p>
+          </div>
+          <div onclick="toggleActiveStep(3)" id="step-btn-3" class="active-step-card cursor-pointer rounded-xl bg-slate-900/60 p-4 border border-slate-800 hover:border-indigo-400 transition">
+            <div class="text-xs font-semibold text-slate-500 mb-1">Step 03</div>
+            <div class="text-sm font-bold text-white">Remembering</div>
+            <p class="text-[11px] text-slate-400 mt-2 leading-tight">Retain key facts and points in memory for future reference.</p>
+          </div>
+          <div onclick="toggleActiveStep(4)" id="step-btn-4" class="active-step-card cursor-pointer rounded-xl bg-slate-900/60 p-4 border border-slate-800 hover:border-indigo-400 transition">
+            <div class="text-xs font-semibold text-slate-500 mb-1">Step 04</div>
+            <div class="text-sm font-bold text-white">Evaluating</div>
+            <p class="text-[11px] text-slate-400 mt-2 leading-tight">Assess the information objectively without personal bias.</p>
+          </div>
+          <div onclick="toggleActiveStep(5)" id="step-btn-5" class="active-step-card cursor-pointer rounded-xl bg-slate-900/60 p-4 border border-slate-800 hover:border-indigo-400 transition">
+            <div class="text-xs font-semibold text-slate-500 mb-1">Step 05</div>
+            <div class="text-sm font-bold text-white">Responding</div>
+            <p class="text-[11px] text-slate-400 mt-2 leading-tight">Provide feedback or ask clarifying questions to show grasp.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 2: Interactive 7 C's Evaluator -->
+      <div class="glass-card rounded-2xl p-6 border border-slate-800">
+        <h3 class="text-md font-bold text-indigo-300 mb-2 flex items-center gap-2">
+          <i class="fa-solid fa-bullhorn"></i> 2. The 7 C’s of Effective Communication
+        </h3>
+        <p class="text-xs text-slate-400 mb-6">Click a card to reveal its exact definition and an example violation in Banking:</p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- 7 Cs Flip Cards -->
+          <div class="flip-card h-40 cursor-pointer" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner relative w-full h-full rounded-xl bg-slate-900 border border-slate-800 p-4 flex flex-col justify-between shadow-lg">
+              <div class="flip-card-front flex flex-col justify-between h-full">
+                <div>
+                  <span class="text-xs font-bold text-indigo-400">1. Clear</span>
+                  <h4 class="text-base font-extrabold text-white mt-1">Direct & Simple</h4>
+                </div>
+                <span class="text-[10px] text-indigo-300 flex items-center"><i class="fa-solid fa-rotate mr-1"></i> Click to Flip</span>
+              </div>
+              <div class="flip-card-back absolute inset-0 bg-indigo-950/90 rounded-xl p-3 flex flex-col justify-center text-xs text-slate-200">
+                <strong class="text-indigo-300">Definition:</strong> Message must be direct and easy to understand without confusion.
+                <strong class="text-rose-300 mt-2">Bad Example:</strong> "We might process your loan depending on various ambient parameters."
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card h-40 cursor-pointer" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner relative w-full h-full rounded-xl bg-slate-900 border border-slate-800 p-4 flex flex-col justify-between shadow-lg">
+              <div class="flip-card-front flex flex-col justify-between h-full">
+                <div>
+                  <span class="text-xs font-bold text-indigo-400">2. Concise</span>
+                  <h4 class="text-base font-extrabold text-white mt-1">Brief & To the Point</h4>
+                </div>
+                <span class="text-[10px] text-indigo-300 flex items-center"><i class="fa-solid fa-rotate mr-1"></i> Click to Flip</span>
+              </div>
+              <div class="flip-card-back absolute inset-0 bg-indigo-950/90 rounded-xl p-3 flex flex-col justify-center text-xs text-slate-200">
+                <strong class="text-indigo-300">Definition:</strong> Keep it short; eliminate unnecessary filler words.
+                <strong class="text-rose-300 mt-2">Bad Example:</strong> "In my personal opinion at this moment in time, I think you should perhaps fill out this form."
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card h-40 cursor-pointer" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner relative w-full h-full rounded-xl bg-slate-900 border border-slate-800 p-4 flex flex-col justify-between shadow-lg">
+              <div class="flip-card-front flex flex-col justify-between h-full">
+                <div>
+                  <span class="text-xs font-bold text-indigo-400">3. Concrete</span>
+                  <h4 class="text-base font-extrabold text-white mt-1">Specific Facts & Figures</h4>
+                </div>
+                <span class="text-[10px] text-indigo-300 flex items-center"><i class="fa-solid fa-rotate mr-1"></i> Click to Flip</span>
+              </div>
+              <div class="flip-card-back absolute inset-0 bg-indigo-950/90 rounded-xl p-3 flex flex-col justify-center text-xs text-slate-200">
+                <strong class="text-indigo-300">Definition:</strong> Use specific facts, exact numbers, and explicit details.
+                <strong class="text-rose-300 mt-2">Bad Example:</strong> "Interest rate is pretty low right now." (Better: "Interest rate is 6.5% p.a.")
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card h-40 cursor-pointer" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner relative w-full h-full rounded-xl bg-slate-900 border border-slate-800 p-4 flex flex-col justify-between shadow-lg">
+              <div class="flip-card-front flex flex-col justify-between h-full">
+                <div>
+                  <span class="text-xs font-bold text-indigo-400">4. Correct</span>
+                  <h4 class="text-base font-extrabold text-white mt-1">Error-Free Language</h4>
+                </div>
+                <span class="text-[10px] text-indigo-300 flex items-center"><i class="fa-solid fa-rotate mr-1"></i> Click to Flip</span>
+              </div>
+              <div class="flip-card-back absolute inset-0 bg-indigo-950/90 rounded-xl p-3 flex flex-col justify-center text-xs text-slate-200">
+                <strong class="text-indigo-300">Definition:</strong> Free from grammatical mistakes, spelling errors, and wrong facts.
+                <strong class="text-rose-300 mt-2">Bad Example:</strong> Incorrect bank account numbers or spelling account holder names wrong.
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card h-40 cursor-pointer" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner relative w-full h-full rounded-xl bg-slate-900 border border-slate-800 p-4 flex flex-col justify-between shadow-lg">
+              <div class="flip-card-front flex flex-col justify-between h-full">
+                <div>
+                  <span class="text-xs font-bold text-indigo-400">5. Coherent</span>
+                  <h4 class="text-base font-extrabold text-white mt-1">Logical Flow</h4>
+                </div>
+                <span class="text-[10px] text-indigo-300 flex items-center"><i class="fa-solid fa-rotate mr-1"></i> Click to Flip</span>
+              </div>
+              <div class="flip-card-back absolute inset-0 bg-indigo-950/90 rounded-xl p-3 flex flex-col justify-center text-xs text-slate-200">
+                <strong class="text-indigo-300">Definition:</strong> Logic flows naturally and sentences connect smoothly.
+                <strong class="text-rose-300 mt-2">Bad Example:</strong> Jumping from loan interest rates directly to bank branch closing time without transition.
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card h-40 cursor-pointer" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner relative w-full h-full rounded-xl bg-slate-900 border border-slate-800 p-4 flex flex-col justify-between shadow-lg">
+              <div class="flip-card-front flex flex-col justify-between h-full">
+                <div>
+                  <span class="text-xs font-bold text-indigo-400">6. Complete</span>
+                  <h4 class="text-base font-extrabold text-white mt-1">All Necessary Info</h4>
+                </div>
+                <span class="text-[10px] text-indigo-300 flex items-center"><i class="fa-solid fa-rotate mr-1"></i> Click to Flip</span>
+              </div>
+              <div class="flip-card-back absolute inset-0 bg-indigo-950/90 rounded-xl p-3 flex flex-col justify-center text-xs text-slate-200">
+                <strong class="text-indigo-300">Definition:</strong> Contains all details required so receiver doesn't have to guess.
+                <strong class="text-rose-300 mt-2">Bad Example:</strong> "Meeting scheduled tomorrow." (Missing: What time? Which branch? What room?)
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card h-40 cursor-pointer" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner relative w-full h-full rounded-xl bg-slate-900 border border-slate-800 p-4 flex flex-col justify-between shadow-lg">
+              <div class="flip-card-front flex flex-col justify-between h-full">
+                <div>
+                  <span class="text-xs font-bold text-indigo-400">7. Courteous</span>
+                  <h4 class="text-base font-extrabold text-white mt-1">Polite & Respectful</h4>
+                </div>
+                <span class="text-[10px] text-indigo-300 flex items-center"><i class="fa-solid fa-rotate mr-1"></i> Click to Flip</span>
+              </div>
+              <div class="flip-card-back absolute inset-0 bg-indigo-950/90 rounded-xl p-3 flex flex-col justify-center text-xs text-slate-200">
+                <strong class="text-indigo-300">Definition:</strong> Polite, respectful, enthusiastic, and considerate of the listener.
+                <strong class="text-rose-300 mt-2">Bad Example:</strong> Using rude tones or demanding words like "Give me your ID immediately!"
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 3: Communication Barriers Interactive Matching -->
+      <div class="glass-card rounded-2xl p-6 border border-slate-800">
+        <h3 class="text-md font-bold text-indigo-300 mb-2 flex items-center gap-2">
+          <i class="fa-solid fa-ban"></i> 3. Communication Barriers Scenario Solver
+        </h3>
+        <p class="text-xs text-slate-400 mb-4">Read each scenario and select the correct type of communication barrier:</p>
+
+        <div class="space-y-4">
+          <!-- Scenario 1 -->
+          <div class="bg-slate-900/80 rounded-xl p-4 border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <span class="text-[11px] text-amber-400 font-semibold uppercase">Scenario A</span>
+              <p class="text-sm text-slate-200 font-medium mt-0.5">A customer cannot hear the teller properly due to loud construction noise outside the bank branch.</p>
+            </div>
+            <div class="flex items-center space-x-2">
+              <select id="barrier-select-1" onchange="checkBarrier(1, 'Physical')" class="bg-slate-800 border border-slate-700 text-xs rounded-lg p-2 text-slate-200 focus:outline-none focus:border-indigo-500">
+                <option value="">-- Choose Barrier --</option>
+                <option value="Physical">Physical Barrier</option>
+                <option value="Linguistic">Linguistic Barrier</option>
+                <option value="Psychological">Psychological Barrier</option>
+                <option value="Cultural">Cultural Barrier</option>
+                <option value="Organizational">Organizational Barrier</option>
+              </select>
+              <span id="barrier-fb-1" class="text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- Scenario 2 -->
+          <div class="bg-slate-900/80 rounded-xl p-4 border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <span class="text-[11px] text-amber-400 font-semibold uppercase">Scenario B</span>
+              <p class="text-sm text-slate-200 font-medium mt-0.5">A manager uses complex financial jargon that a first-time account holder cannot comprehend.</p>
+            </div>
+            <div class="flex items-center space-x-2">
+              <select id="barrier-select-2" onchange="checkBarrier(2, 'Linguistic')" class="bg-slate-800 border border-slate-700 text-xs rounded-lg p-2 text-slate-200 focus:outline-none focus:border-indigo-500">
+                <option value="">-- Choose Barrier --</option>
+                <option value="Physical">Physical Barrier</option>
+                <option value="Linguistic">Linguistic Barrier</option>
+                <option value="Psychological">Psychological Barrier</option>
+                <option value="Cultural">Cultural Barrier</option>
+                <option value="Organizational">Organizational Barrier</option>
+              </select>
+              <span id="barrier-fb-2" class="text-xs font-bold"></span>
+            </div>
+          </div>
+
+          <!-- Scenario 3 -->
+          <div class="bg-slate-900/80 rounded-xl p-4 border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <span class="text-[11px] text-amber-400 font-semibold uppercase">Scenario C</span>
+              <p class="text-sm text-slate-200 font-medium mt-0.5">A junior clerk feels too anxious and stressed to share constructive feedback with the senior manager.</p>
+            </div>
+            <div class="flex items-center space-x-2">
+              <select id="barrier-select-3" onchange="checkBarrier(3, 'Psychological')" class="bg-slate-800 border border-slate-700 text-xs rounded-lg p-2 text-slate-200 focus:outline-none focus:border-indigo-500">
+                <option value="">-- Choose Barrier --</option>
+                <option value="Physical">Physical Barrier</option>
+                <option value="Linguistic">Linguistic Barrier</option>
+                <option value="Psychological">Psychological Barrier</option>
+                <option value="Cultural">Cultural Barrier</option>
+                <option value="Organizational">Organizational Barrier</option>
+              </select>
+              <span id="barrier-fb-3" class="text-xs font-bold"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 4: Writing Skills Cheat Sheet (MINTS & Sentence Types) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="glass-card rounded-2xl p-5 border border-slate-800">
+          <h4 class="text-sm font-bold text-indigo-300 mb-3 flex items-center gap-2">
+            <i class="fa-solid fa-font"></i> MINTS Rule for Capitalization
+          </h4>
+          <ul class="space-y-2 text-xs">
+            <li class="p-2 rounded bg-slate-900/60 border border-slate-800 flex justify-between"><span class="font-bold text-indigo-400">M - Months & Days</span> <span class="text-slate-300">January, Monday</span></li>
+            <li class="p-2 rounded bg-slate-900/60 border border-slate-800 flex justify-between"><span class="font-bold text-indigo-400">I - The pronoun "I"</span> <span class="text-slate-300">"I will apply for a loan."</span></li>
+            <li class="p-2 rounded bg-slate-900/60 border border-slate-800 flex justify-between"><span class="font-bold text-indigo-400">N - Names of people/places</span> <span class="text-slate-300">Rahul, Delhi, State Bank</span></li>
+            <li class="p-2 rounded bg-slate-900/60 border border-slate-800 flex justify-between"><span class="font-bold text-indigo-400">T - Titles</span> <span class="text-slate-300">Dr., Mr., Manager Roy</span></li>
+            <li class="p-2 rounded bg-slate-900/60 border border-slate-800 flex justify-between"><span class="font-bold text-indigo-400">S - Starting letter</span> <span class="text-slate-300">First letter of every sentence</span></li>
+          </ul>
+        </div>
+
+        <div class="glass-card rounded-2xl p-5 border border-slate-800">
+          <h4 class="text-sm font-bold text-indigo-300 mb-3 flex items-center gap-2">
+            <i class="fa-solid fa-code-compare"></i> Active vs. Passive Voice Transformer
+          </h4>
+          <div class="space-y-3 text-xs">
+            <div class="p-3 rounded-lg bg-indigo-950/40 border border-indigo-500/30">
+              <div class="font-semibold text-indigo-300">Active Voice:</div>
+              <p class="text-slate-200 mt-0.5">"The manager approved the home loan."</p>
+              <div class="text-[10px] text-slate-400 mt-1">Subject (Manager) performs the action.</div>
+            </div>
+            <div class="p-3 rounded-lg bg-purple-950/40 border border-purple-500/30">
+              <div class="font-semibold text-purple-300">Passive Voice:</div>
+              <p class="text-slate-200 mt-0.5">"The home loan was approved by the manager."</p>
+              <div class="text-[10px] text-slate-400 mt-1">Subject receives the action.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: UNIT 2 SELF MOTIVATION -->
+    <section id="sec-unit2" class="tab-content hidden space-y-8">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+        <div>
+          <h2 class="text-xl font-bold text-white flex items-center gap-2">
+            <span class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm">2</span>
+            Unit 2: Self Motivation & Self Management
+          </h2>
+          <p class="text-xs text-slate-400 mt-0.5">Learn Intrinsic vs Extrinsic drive, SMART goal setting, and time management.</p>
+        </div>
+      </div>
+
+      <!-- Intrinsic vs Extrinsic Interactive Sorter -->
+      <div class="glass-card rounded-2xl p-6 border border-slate-800">
+        <h3 class="text-md font-bold text-emerald-300 mb-2 flex items-center gap-2">
+          <i class="fa-solid fa-lightbulb"></i> 1. Motivation Type Sorter
+        </h3>
+        <p class="text-xs text-slate-400 mb-4">Click each motivation example to categorize it as **Intrinsic** (Internal) or **Extrinsic** (External):</p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- Intrinsic Column -->
+          <div class="bg-slate-900/80 rounded-xl p-4 border border-emerald-500/30">
+            <h4 class="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-2 flex items-center justify-between">
+              <span>Intrinsic (Internal) Motivation</span>
+              <i class="fa-solid fa-heart"></i>
+            </h4>
+            <p class="text-[11px] text-slate-400 mb-3">Driven by personal satisfaction, curiosity, and joy of learning.</p>
+            <div class="space-y-2">
+              <div class="p-2.5 rounded-lg bg-slate-800 text-xs text-slate-200 border border-slate-700 flex justify-between items-center">
+                <span>Studying banking because you love financial markets.</span>
+                <span class="text-emerald-400 font-bold text-[10px]">INTRINSIC</span>
+              </div>
+              <div class="p-2.5 rounded-lg bg-slate-800 text-xs text-slate-200 border border-slate-700 flex justify-between items-center">
+                <span>Practicing coding to build your own personal app.</span>
+                <span class="text-emerald-400 font-bold text-[10px]">INTRINSIC</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Extrinsic Column -->
+          <div class="bg-slate-900/80 rounded-xl p-4 border border-blue-500/30">
+            <h4 class="text-xs font-bold text-blue-400 uppercase tracking-wider mb-2 flex items-center justify-between">
+              <span>Extrinsic (External) Motivation</span>
+              <i class="fa-solid fa-trophy"></i>
+            </h4>
+            <p class="text-[11px] text-slate-400 mb-3">Driven by rewards, cash bonuses, grades, or avoiding punishment.</p>
+            <div class="space-y-2">
+              <div class="p-2.5 rounded-lg bg-slate-800 text-xs text-slate-200 border border-slate-700 flex justify-between items-center">
+                <span>Studying extra hours to earn a $500 cash reward.</span>
+                <span class="text-blue-400 font-bold text-[10px]">EXTRINSIC</span>
+              </div>
+              <div class="p-2.5 rounded-lg bg-slate-800 text-xs text-slate-200 border border-slate-700 flex justify-between items-center">
+                <span>Completing tasks on time to avoid penalty or reprimand.</span>
+                <span class="text-blue-400 font-bold text-[10px]">EXTRINSIC</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive SMART Goal Builder & Evaluator -->
+      <div class="glass-card rounded-2xl p-6 border border-slate-800">
+        <h3 class="text-md font-bold text-emerald-300 mb-2 flex items-center gap-2">
+          <i class="fa-solid fa-bullseye"></i> 2. Interactive SMART Goal Analyzer
+        </h3>
+        <p class="text-xs text-slate-400 mb-6">Type or test your goal below to see if it meets all 5 SMART criteria for full marks:</p>
+
+        <!-- Interactive SMART Breakdown Cards -->
+        <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-6">
+          <div class="bg-slate-900 p-3 rounded-xl border border-emerald-500/40 text-center">
+            <div class="text-lg font-black text-emerald-400">S</div>
+            <div class="text-xs font-bold text-white">Specific</div>
+            <div class="text-[10px] text-slate-400 mt-1">Clear & explicit details</div>
+          </div>
+          <div class="bg-slate-900 p-3 rounded-xl border border-emerald-500/40 text-center">
+            <div class="text-lg font-black text-emerald-400">M</div>
+            <div class="text-xs font-bold text-white">Measurable</div>
+            <div class="text-[10px] text-slate-400 mt-1">Numbers or percentage</div>
+          </div>
+          <div class="bg-slate-900 p-3 rounded-xl border border-emerald-500/40 text-center">
+            <div class="text-lg font-black text-emerald-400">A</div>
+            <div class="text-xs font-bold text-white">Achievable</div>
+            <div class="text-[10px] text-slate-400 mt-1">Realistic with resources</div>
+          </div>
+          <div class="bg-slate-900 p-3 rounded-xl border border-emerald-500/40 text-center">
+            <div class="text-lg font-black text-emerald-400">R</div>
+            <div class="text-xs font-bold text-white">Relevant</div>
+            <div class="text-[10px] text-slate-400 mt-1">Aligned with target</div>
+          </div>
+          <div class="bg-slate-900 p-3 rounded-xl border border-emerald-500/40 text-center col-span-2 sm:col-span-1">
+            <div class="text-lg font-black text-emerald-400">T</div>
+            <div class="text-xs font-bold text-white">Time-Bound</div>
+            <div class="text-[10px] text-slate-400 mt-1">Has strict deadline</div>
+          </div>
+        </div>
+
+        <!-- SMART Goal Example comparison -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="p-4 rounded-xl bg-rose-950/30 border border-rose-500/30">
+            <span class="text-xs font-bold text-rose-400 uppercase flex items-center gap-1">
+              <i class="fa-solid fa-xmark"></i> Vague Goal (0 Marks)
+            </span>
+            <p class="text-sm font-semibold text-slate-200 mt-2">"I want to do well in my Banking exam."</p>
+            <p class="text-xs text-slate-400 mt-2"><strong>Why it fails:</strong> Not specific, no target percentage, no timeframe, no actionable plan.</p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-emerald-950/30 border border-emerald-500/30">
+            <span class="text-xs font-bold text-emerald-400 uppercase flex items-center gap-1">
+              <i class="fa-solid fa-check"></i> Perfect SMART Goal (Full Marks)
+            </span>
+            <p class="text-sm font-semibold text-slate-200 mt-2">"I will score 90% in Banking by solving 5 past papers every evening before Sept 28."</p>
+            <p class="text-xs text-slate-400 mt-2"><strong>Why it succeeds:</strong> Specific (90%), Measurable (5 papers daily), Time-bound (Sept 28).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 3: Time Management Matrix -->
+      <div class="glass-card rounded-2xl p-6 border border-slate-800">
+        <h3 class="text-md font-bold text-emerald-300 mb-2 flex items-center gap-2">
+          <i class="fa-solid fa-clock"></i> 3. Time Management Steps
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs">
+          <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+            <div class="font-bold text-emerald-400 text-sm">1. Organize</div>
+            <p class="text-slate-300 mt-1">Plan tasks daily using a planner, to-do list, or digital schedule.</p>
+          </div>
+          <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+            <div class="font-bold text-emerald-400 text-sm">2. Prioritize</div>
+            <p class="text-slate-300 mt-1">Focus on urgent and important tasks first (e.g. Business Math before casual reading).</p>
+          </div>
+          <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+            <div class="font-bold text-emerald-400 text-sm">3. Control</div>
+            <p class="text-slate-300 mt-1">Avoid procrastination, limit social media notifications, and set firm deadlines.</p>
+          </div>
+          <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+            <div class="font-bold text-emerald-400 text-sm">4. Track</div>
+            <p class="text-slate-300 mt-1">Evaluate time spent on each task and optimize for the next day.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: UNIT 3 ICT SKILLS -->
+    <section id="sec-unit3" class="tab-content hidden space-y-8">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+        <div>
+          <h2 class="text-xl font-bold text-white flex items-center gap-2">
+            <span class="w-8 h-8 rounded-lg bg-violet-500/20 text-violet-400 flex items-center justify-center text-sm">3</span>
+            Unit 3: Information & Communication Technology (ICT) Skills
+          </h2>
+          <p class="text-xs text-slate-400 mt-0.5">Master Operating Systems, hardware/software maintenance, and cyber threat defense.</p>
+        </div>
+      </div>
+
+      <!-- Topic 1: Operating System Functions Visualizer -->
+      <div class="glass-card rounded-2xl p-6 border border-slate-800">
+        <h3 class="text-md font-bold text-violet-300 mb-2 flex items-center gap-2">
+          <i class="fa-solid fa-microchip"></i> 1. Core Functions of an Operating System (OS)
+        </h3>
+        <p class="text-xs text-slate-400 mb-4">Click each function to see what examiners expect in a 2-mark or 3-mark question:</p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+          <div onclick="showOsDetail('processor')" class="cursor-pointer bg-slate-900 hover:bg-slate-800 p-4 rounded-xl border border-slate-800 transition">
+            <i class="fa-solid fa-sliders text-violet-400 text-lg mb-2"></i>
+            <h4 class="text-sm font-bold text-white">Processor Management</h4>
+            <p class="text-[11px] text-slate-400 mt-1">Allocates CPU execution time across multiple running tasks and processes.</p>
+          </div>
+
+          <div onclick="showOsDetail('memory')" class="cursor-pointer bg-slate-900 hover:bg-slate-800 p-4 rounded-xl border border-slate-800 transition">
+            <i class="fa-solid fa-memory text-violet-400 text-lg mb-2"></i>
+            <h4 class="text-sm font-bold text-white">Memory Management</h4>
+            <p class="text-[11px] text-slate-400 mt-1">Manages primary RAM allocation and release for running applications.</p>
+          </div>
+
+          <div onclick="showOsDetail('file')" class="cursor-pointer bg-slate-900 hover:bg-slate-800 p-4 rounded-xl border border-slate-800 transition">
+            <i class="fa-solid fa-folder-tree text-violet-400 text-lg mb-2"></i>
+            <h4 class="text-sm font-bold text-white">File Management</h4>
+            <p class="text-[11px] text-slate-400 mt-1">Organizes files, data directories, and storage access permissions.</p>
+          </div>
+
+          <div onclick="showOsDetail('device')" class="cursor-pointer bg-slate-900 hover:bg-slate-800 p-4 rounded-xl border border-slate-800 transition">
+            <i class="fa-solid fa-keyboard text-violet-400 text-lg mb-2"></i>
+            <h4 class="text-sm font-bold text-white">Device Management</h4>
+            <p class="text-[11px] text-slate-400 mt-1">Handles hardware drivers and peripheral I/O devices (keyboard, printer, mouse).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 2: Cyber Threat Defense Interactive Scanner -->
+      <div class="glass-card rounded-2xl p-6 border border-slate-800">
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="text-md font-bold text-violet-300 flex items-center gap-2">
+            <i class="fa-solid fa-bug"></i> 2. Cyber Threat Identification Matrix
+          </h3>
+          <span class="text-xs px-2.5 py-1 rounded bg-rose-500/20 text-rose-300 border border-rose-500/30 font-semibold">High Exam Weightage</span>
+        </div>
+        <p class="text-xs text-slate-400 mb-6">Learn the precise distinctions between malware types to avoid losing marks in short-answer questions:</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <!-- Threat 1: Virus -->
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold text-rose-400">VIRUS</span>
+              <i class="fa-solid fa-virus text-rose-400"></i>
+            </div>
+            <p class="text-xs text-slate-200 font-semibold">Attaches to existing files & requires human action to spread.</p>
+            <p class="text-[11px] text-slate-400 mt-2">Example: Opening an infected `.exe` email attachment that corrupts banking software.</p>
+          </div>
+
+          <!-- Threat 2: Worm -->
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold text-amber-400">WORM</span>
+              <i class="fa-solid fa-worm text-amber-400"></i>
+            </div>
+            <p class="text-xs text-slate-200 font-semibold">Standalone malware that replicates automatically across networks.</p>
+            <p class="text-[11px] text-slate-400 mt-2">Example: Spreads independently from PC to PC across bank server networks without human intervention.</p>
+          </div>
+
+          <!-- Threat 3: Trojan Horse -->
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold text-violet-400">TROJAN HORSE</span>
+              <i class="fa-solid fa-shield-cat text-violet-400"></i>
+            </div>
+            <p class="text-xs text-slate-200 font-semibold">Disguised as legitimate useful software to create a back door.</p>
+            <p class="text-[11px] text-slate-400 mt-2">Example: A fake bank calculator app that secretly allows hackers access to confidential files.</p>
+          </div>
+
+          <!-- Threat 4: Phishing -->
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold text-sky-400">PHISHING</span>
+              <i class="fa-solid fa-fish-fins text-sky-400"></i>
+            </div>
+            <p class="text-xs text-slate-200 font-semibold">Fraudulent attempt to steal confidential login/card info via fake emails.</p>
+            <p class="text-[11px] text-slate-400 mt-2">Example: Fake bank email asking you to click a link to "verify account password urgently".</p>
+          </div>
+
+          <!-- Threat 5: Spyware -->
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold text-emerald-400">SPYWARE</span>
+              <i class="fa-solid fa-user-secret text-emerald-400"></i>
+            </div>
+            <p class="text-xs text-slate-200 font-semibold">Secretly records keystrokes and tracks user online activity.</p>
+            <p class="text-[11px] text-slate-400 mt-2">Example: Keyloggers capturing net-banking passwords entered on public computers.</p>
+          </div>
+
+          <!-- Cyber Security Checklist -->
+          <div class="bg-slate-900 p-4 rounded-xl border border-emerald-500/30">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold text-emerald-400">5 BEST SECURITY PRACTICES</span>
+              <i class="fa-solid fa-lock text-emerald-400"></i>
+            </div>
+            <ul class="text-[11px] text-slate-300 space-y-1">
+              <li>• 8-12 char strong password with symbols</li>
+              <li>• Keep updated Antivirus definitions</li>
+              <li>• Enable Firewall to block bad traffic</li>
+              <li>• Verify **HTTPS** in browser URL</li>
+              <li>• Take regular external data backups</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: FULL MARKS PRACTICE QUIZ -->
+    <section id="sec-quiz" class="tab-content hidden space-y-6">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+        <div>
+          <h2 class="text-xl font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-clipboard-question text-indigo-400"></i> Part A Exam Master Quiz
+          </h2>
+          <p class="text-xs text-slate-400 mt-0.5">Answer these exam-style questions to verify your 100% readiness for Part A.</p>
+        </div>
+        <div class="text-right">
+          <span class="text-xs text-slate-400 block">Current Quiz Score</span>
+          <span id="quiz-score-display" class="text-lg font-black text-indigo-400">0 / 6</span>
+        </div>
+      </div>
+
+      <div id="quiz-container" class="space-y-6">
+        <!-- Questions injected via JS -->
+      </div>
+
+      <div class="text-center pt-4">
+        <button onclick="evaluateQuiz()" class="px-8 py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-bold text-sm shadow-xl shadow-indigo-600/30 transition">
+          Submit & Calculate Final Part A Score
+        </button>
+      </div>
+    </section>
+
+    <!-- TAB 5: EXAM CHECKLIST -->
+    <section id="sec-checklist" class="tab-content hidden space-y-6">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+        <div>
+          <h2 class="text-xl font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-square-check text-emerald-400"></i> Full Marks Exam Readiness Checklist
+          </h2>
+          <p class="text-xs text-slate-400 mt-0.5">Check off every item before entering the exam room on the 28th!</p>
+        </div>
+      </div>
+
+      <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
+        <div class="space-y-3">
+          <label class="flex items-start space-x-3 p-3 rounded-xl bg-slate-900 border border-slate-800 cursor-pointer hover:bg-slate-800/80 transition">
+            <input type="checkbox" onchange="updateChecklistState()" class="chk-item mt-1 rounded text-indigo-600 focus:ring-indigo-500">
+            <div>
+              <span class="text-sm font-bold text-white block">Can you list and define all 7 C's of Communication?</span>
+              <span class="text-xs text-slate-400">Clear, Concise, Concrete, Correct, Coherent, Complete, Courteous.</span>
+            </div>
+          </label>
+
+          <label class="flex items-start space-x-3 p-3 rounded-xl bg-slate-900 border border-slate-800 cursor-pointer hover:bg-slate-800/80 transition">
+            <input type="checkbox" onchange="updateChecklistState()" class="chk-item mt-1 rounded text-indigo-600 focus:ring-indigo-500">
+            <div>
+              <span class="text-sm font-bold text-white block">Can you clearly differentiate Intrinsic vs. Extrinsic Motivation with banking examples?</span>
+              <span class="text-xs text-slate-400">Intrinsic = Internal fulfillment; Extrinsic = Cash rewards or avoiding penalty.</span>
+            </div>
+          </label>
+
+          <label class="flex items-start space-x-3 p-3 rounded-xl bg-slate-900 border border-slate-800 cursor-pointer hover:bg-slate-800/80 transition">
+            <input type="checkbox" onchange="updateChecklistState()" class="chk-item mt-1 rounded text-indigo-600 focus:ring-indigo-500">
+            <div>
+              <span class="text-sm font-bold text-white block">Do you know what each letter in SMART Goal setting stands for?</span>
+              <span class="text-xs text-slate-400">Specific, Measurable, Achievable, Realistic/Relevant, Time-bound.</span>
+            </div>
+          </label>
+
+          <label class="flex items-start space-x-3 p-3 rounded-xl bg-slate-900 border border-slate-800 cursor-pointer hover:bg-slate-800/80 transition">
+            <input type="checkbox" onchange="updateChecklistState()" class="chk-item mt-1 rounded text-indigo-600 focus:ring-indigo-500">
+            <div>
+              <span class="text-sm font-bold text-white block">Can you identify 3 major barriers to communication and give real-life examples?</span>
+              <span class="text-xs text-slate-400">Physical (noise), Linguistic (jargon), Psychological (anxiety/fear).</span>
+            </div>
+          </label>
+
+          <label class="flex items-start space-x-3 p-3 rounded-xl bg-slate-900 border border-slate-800 cursor-pointer hover:bg-slate-800/80 transition">
+            <input type="checkbox" onchange="updateChecklistState()" class="chk-item mt-1 rounded text-indigo-600 focus:ring-indigo-500">
+            <div>
+              <span class="text-sm font-bold text-white block">Can you distinguish between a Virus, Worm, Trojan Horse, and Phishing?</span>
+              <span class="text-xs text-slate-400">Virus needs host file; Worm spreads automatically; Trojan disguises as good app; Phishing steals credentials via fake email.</span>
+            </div>
+          </label>
+
+          <label class="flex items-start space-x-3 p-3 rounded-xl bg-slate-900 border border-slate-800 cursor-pointer hover:bg-slate-800/80 transition">
+            <input type="checkbox" onchange="updateChecklistState()" class="chk-item mt-1 rounded text-indigo-600 focus:ring-indigo-500">
+            <div>
+              <span class="text-sm font-bold text-white block">Do you know 4 key functions of an Operating System?</span>
+              <span class="text-xs text-slate-400">Processor Management, Memory Management, File Management, Device Management.</span>
+            </div>
+          </label>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- JavaScript Application Logic -->
+  <script>
+    // Tab Switching Function
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.nav-tab').forEach(el => {
+        el.classList.remove('bg-indigo-600', 'text-white');
+        el.classList.add('bg-slate-800/80', 'text-slate-400');
+      });
+
+      const selectedTab = document.getElementById('tab-' + tabId);
+      const selectedContent = document.getElementById('sec-' + tabId);
+
+      if (selectedTab && selectedContent) {
+        selectedContent.classList.remove('hidden');
+        selectedTab.classList.remove('bg-slate-800/80', 'text-slate-400');
+        selectedTab.classList.add('bg-indigo-600', 'text-white');
+      }
+    }
+
+    // Active Listening Steps Handler
+    function toggleActiveStep(stepNum) {
+      for (let i = 1; i <= 5; i++) {
+        const btn = document.getElementById('step-btn-' + i);
+        if (i === stepNum) {
+          btn.classList.add('bg-slate-900', 'border-indigo-500/50');
+          btn.classList.remove('bg-slate-900/60', 'border-slate-800');
+        } else {
+          btn.classList.remove('bg-slate-900', 'border-indigo-500/50');
+          btn.classList.add('bg-slate-900/60', 'border-slate-800');
+        }
+      }
+    }
+
+    // Barrier Checker Logic
+    function checkBarrier(scenarioNum, correctType) {
+      const select = document.getElementById('barrier-select-' + scenarioNum);
+      const feedback = document.getElementById('barrier-fb-' + scenarioNum);
+      if (select.value === correctType) {
+        feedback.textContent = '✓ Correct!';
+        feedback.className = 'text-xs font-bold text-emerald-400';
+      } else if (select.value === '') {
+        feedback.textContent = '';
+      } else {
+        feedback.textContent = '✗ Try Again';
+        feedback.className = 'text-xs font-bold text-rose-400';
+      }
+      updateGlobalMastery();
+    }
+
+    // Quiz Questions Dataset
+    const quizData = [
+      {
+        q: "Which C of communication ensures that a message uses specific facts and exact numbers rather than vague statements?",
+        options: ["Clear", "Concise", "Concrete", "Courteous"],
+        ans: 2,
+        exp: "Concrete communication relies on specific facts, figures, and clear details (e.g., '6.5% interest rate' instead of 'low interest')."
+      },
+      {
+        q: "Studying hard to earn a cash reward or top grade is an example of which type of motivation?",
+        options: ["Intrinsic Motivation", "Extrinsic Motivation", "Psychological Barrier", "Self-Actualization"],
+        ans: 1,
+        exp: "Extrinsic motivation comes from external incentives such as money, grades, or avoidance of punishment."
+      },
+      {
+        q: "In the SMART goal framework, what does the letter 'M' stand for?",
+        options: ["Mindful", "Measurable", "Manageable", "Meaningful"],
+        ans: 1,
+        exp: "'M' stands for Measurable — goals must have quantifiable metrics to track progress."
+      },
+      {
+        q: "Which cyber threat disguises itself as a useful, legitimate program but creates a malicious backdoor?",
+        options: ["Computer Virus", "Worm", "Trojan Horse", "Phishing"],
+        ans: 2,
+        exp: "A Trojan Horse pretends to be beneficial software while secretly giving attackers access."
+      },
+      {
+        q: "Which function of an Operating System is responsible for allocating RAM to active applications?",
+        options: ["Processor Management", "Memory Management", "File Management", "Device Management"],
+        ans: 1,
+        exp: "Memory Management oversees the RAM allocations required by running software."
+      },
+      {
+        q: "According to the MINTS rule of capitalization, what does the letter 'N' stand for?",
+        options: ["Numbers", "Names of people/places", "Nouns only", "New sentences"],
+        ans: 1,
+        exp: "In MINTS, N stands for Proper Names of people, places, and organizations."
+      }
+    ];
+
+    // Load Quiz Questions Into DOM
+    function renderQuiz() {
+      const container = document.getElementById('quiz-container');
+      container.innerHTML = '';
+
+      quizData.forEach((item, idx) => {
+        const qCard = document.createElement('div');
+        qCard.className = 'glass-card rounded-2xl p-5 border border-slate-800 space-y-3';
+        qCard.innerHTML = `
+          <div class="flex items-start justify-between">
+            <span class="text-xs font-bold text-indigo-400 uppercase">Question 0${idx + 1}</span>
+            <span class="text-[11px] text-slate-500">1 Mark</span>
+          </div>
+          <p class="text-sm font-semibold text-slate-100">${item.q}</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+            ${item.options.map((opt, oIdx) => `
+              <label class="flex items-center space-x-2 p-2.5 rounded-lg bg-slate-900 border border-slate-800 cursor-pointer hover:bg-slate-800 transition">
+                <input type="radio" name="q-${idx}" value="${oIdx}" class="text-indigo-600 focus:ring-indigo-500">
+                <span class="text-slate-300">${opt}</span>
+              </label>
+            `).join('')}
+          </div>
+          <div id="q-fb-${idx}" class="hidden text-xs p-3 rounded-lg mt-2"></div>
+        `;
+        container.appendChild(qCard);
+      });
+    }
+
+    // Evaluate Quiz Answers
+    function evaluateQuiz() {
+      let score = 0;
+      quizData.forEach((item, idx) => {
+        const selected = document.querySelector(`input[name="q-${idx}"]:checked`);
+        const fbBox = document.getElementById(`q-fb-${idx}`);
+        fbBox.classList.remove('hidden', 'bg-emerald-950/50', 'bg-rose-950/50', 'text-emerald-300', 'text-rose-300', 'border-emerald-500/30', 'border-rose-500/30');
+
+        if (selected && parseInt(selected.value) === item.ans) {
+          score++;
+          fbBox.className = 'text-xs p-3 rounded-lg mt-2 bg-emerald-950/50 border border-emerald-500/30 text-emerald-300';
+          fbBox.innerHTML = `<strong>✓ Correct!</strong> ${item.exp}`;
+        } else {
+          fbBox.className = 'text-xs p-3 rounded-lg mt-2 bg-rose-950/50 border border-rose-500/30 text-rose-300';
+          fbBox.innerHTML = `<strong>✗ Incorrect.</strong> Correct answer: <em>${item.options[item.ans]}</em>. ${item.exp}`;
+        }
+      });
+
+      document.getElementById('quiz-score-display').textContent = `${score} / ${quizData.length}`;
+      updateGlobalMastery();
+    }
+
+    // Update Overall Mastery State
+    function updateChecklistState() {
+      updateGlobalMastery();
+    }
+
+    function updateGlobalMastery() {
+      const totalChecks = document.querySelectorAll('.chk-item').length;
+      const checkedCount = document.querySelectorAll('.chk-item:checked').length;
+      
+      let percentage = Math.round((checkedCount / totalChecks) * 100);
+      if (isNaN(percentage)) percentage = 0;
+
+      document.getElementById('mastery-percent').textContent = percentage + '%';
+      document.getElementById('mastery-bar').style.width = percentage + '%';
+    }
+
+    function resetProgress() {
+      document.querySelectorAll('.chk-item').forEach(c => c.checked = false);
+      updateGlobalMastery();
+    }
+
+    // Initialize Page
+    window.onload = function() {
+      renderQuiz();
+    };
+  </script>
+</body>
+</html>
